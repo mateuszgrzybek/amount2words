@@ -1,0 +1,65 @@
+{
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "extends": ["plugin:vue/recommended", "@vue/airbnb", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "array-bracket-spacing": ["error", "never"],
+    "arrow-parens": ["error", "as-needed"],
+    "camelcase": [
+      "error",
+      {
+        "properties": "never",
+        "ignoreDestructuring": true,
+        "ignoreImports": true
+      }
+    ],
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "func-call-spacing": ["error", "never"],
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "indent": "off",
+    "key-spacing": [
+      "error",
+      {
+        "beforeColon": false
+      }
+    ],
+    "keyword-spacing": [
+      2,
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "linebreak-style": "off",
+    "max-len": "off",
+    "no-empty-pattern": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "no-plusplus": "off",
+    "no-return-assign": ["error", { "parensOnly": false }],
+    "no-tabs": "off",
+    "object-curly-spacing": ["error", "always"],
+    "prettier/prettier": [
+      "warn",
+      {},
+      {
+        "usePrettierrc": true
+      }
+    ],
+    "radix": "off",
+    "quotes": "off",
+    "semi": "off",
+    "space-after-keywords": "off"
+  }
+}
