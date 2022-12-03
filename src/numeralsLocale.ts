@@ -1,23 +1,18 @@
+import currencyOptions from "./currencyOptions";
+
 const numeralsLocale = {
-  en: {
+  enUS: {
     monetaryUnitSymbol: "USD",
-    wholeMonetaryUnit(value: string): string {
-      switch (value) {
-        case "1":
-          return "Dollar";
-        default:
-          return "Dollars";
-      }
+    wholeMonetaryUnit(value: string, currency: string, locale: string): string {
+      const currencyObject = currencyOptions[currency as keyof typeof currencyOptions];
+      return currencyObject[locale as keyof typeof currencyObject].whole(value);
     },
-    decimalMonetaryUnit(value: string): string {
-      switch (value) {
-        case "1":
-          return "Cent";
-        default:
-          return "Cents";
-      }
+    decimalMonetaryUnit(value: string, currency: string, locale: string): string {
+      const currencyObject = currencyOptions[currency as keyof typeof currencyOptions];
+      return currencyObject[locale as keyof typeof currencyObject].decimal(value);
     },
     delimiter: ".",
+    conjunctionWord: "and",
     thousandsDelimiter: ",",
     zero: "Zero",
     oneToNineteen: [
@@ -56,37 +51,18 @@ const numeralsLocale = {
       return this.largeNumbers()[tripletsArray.length - currentTripletIndex - 1];
     },
   },
-  pl: {
+  plPL: {
     monetaryUnitSymbol: "PLN",
-    wholeMonetaryUnit(value: string): string {
-      const lastNumber = value.at(-1);
-      const preceedingNumber = value.at(-2);
-      switch (lastNumber) {
-        case "1":
-          return !!preceedingNumber ? "Złotych" : "Złoty";
-        case "2":
-        case "3":
-        case "4":
-          return (!!preceedingNumber && preceedingNumber !== "1") || value.length === 1 ? "Złote" : "Złotych";
-        default:
-          return "Złotych";
-      }
+    wholeMonetaryUnit(value: string, currency: string, locale: string): string {
+      const currencyObject = currencyOptions[currency as keyof typeof currencyOptions];
+      return currencyObject[locale as keyof typeof currencyObject].whole(value);
     },
-    decimalMonetaryUnit(value: string): string {
-      const lastNumber = value.at(-1);
-      const preceedingNumber = value.at(-2);
-      switch (lastNumber) {
-        case "1":
-          return !!preceedingNumber ? "Groszy" : "Grosz";
-        case "2":
-        case "3":
-        case "4":
-          return !!preceedingNumber && preceedingNumber !== "1" ? "Grosze" : "Groszy";
-        default:
-          return "Groszy";
-      }
+    decimalMonetaryUnit(value: string, currency: string, locale: string): string {
+      const currencyObject = currencyOptions[currency as keyof typeof currencyOptions];
+      return currencyObject[locale as keyof typeof currencyObject].decimal(value);
     },
     delimiter: ",",
+    conjunctionWord: "i",
     thousandsDelimiter: null,
     zero: "Zero",
     oneToNineteen: [
