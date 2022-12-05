@@ -1,101 +1,66 @@
+const currencyDeclinationMethods = {
+  // monetaryUnitSingular: Dollar
+  enUS: function (value: string, monetaryUnitSingular: string, monetaryUnitPlural: string): string {
+    const lastNumber = value?.at(-1);
+    const preceedingNumber = value?.at(-2);
+    switch (lastNumber) {
+      case "1":
+        return !!preceedingNumber && preceedingNumber !== "0" ? monetaryUnitPlural : monetaryUnitSingular;
+      default:
+        return monetaryUnitPlural;
+    }
+  },
+  // monetaryUnitSingular: Dolar, monetaryUnitPlural: Dolarów, monetaryUnitPluralException: Dolary
+  plPL: function (value: string, monetaryUnitSingular: string, monetaryUnitPlural: string, monetaryUnitPluralException: string): string {
+    const lastNumber = value?.at(-1);
+    const preceedingNumber = value?.at(-2);
+    switch (lastNumber) {
+      case "1":
+        return !!preceedingNumber && preceedingNumber !== "0" ? monetaryUnitPlural : monetaryUnitSingular;
+      case "2":
+      case "3":
+      case "4":
+        return (!!preceedingNumber && preceedingNumber !== "1") || value.length === 1 ? monetaryUnitPluralException : monetaryUnitPlural;
+      default:
+        return monetaryUnitPlural;
+    }
+  },
+};
+
 const currencyOptions = {
   USD: {
     enUS: {
-      whole: function (value: string) {
-        switch (value) {
-          case "1":
-            return "Dollar";
-          default:
-            return "Dollars";
-        }
+      whole: function (value: string): string {
+        return currencyDeclinationMethods.enUS(value, "Dollar", "Dollars");
       },
-      decimal: function (value: string) {
-        switch (value) {
-          case "1":
-            return "Cent";
-          default:
-            return "Cents";
-        }
+      decimal: function (value: string): string {
+        return currencyDeclinationMethods.enUS(value, "Cent", "Cents");
       },
     },
     plPL: {
       whole: function (value: string): string {
-        const lastNumber = value?.at(-1);
-        const preceedingNumber = value?.at(-2);
-        switch (lastNumber) {
-          case "1":
-            return !!preceedingNumber ? "Dolarów" : "Dolar";
-          case "2":
-          case "3":
-          case "4":
-            return (!!preceedingNumber && preceedingNumber !== "1") || value.length === 1 ? "Dolary" : "Dolarów";
-          default:
-            return "Dolarów";
-        }
+        return currencyDeclinationMethods.plPL(value, "Dolar", "Dolarów", "Dolary");
       },
       decimal: function (value: string): string {
-        const lastNumber = value?.at(-1);
-        const preceedingNumber = value?.at(-2);
-        switch (lastNumber) {
-          case "1":
-            return !!preceedingNumber ? "Centów" : "Cent";
-          case "2":
-          case "3":
-          case "4":
-            return !!preceedingNumber && preceedingNumber !== "1" ? "Centy" : "Centów";
-          default:
-            return "Centów";
-        }
+        return currencyDeclinationMethods.plPL(value, "Cent", "Centów", "Centy");
       },
     },
   },
   PLN: {
     enUS: {
       whole: function (value: string) {
-        switch (value) {
-          case "1":
-            return "Zloty";
-          default:
-            return "Zlotys";
-        }
+        return currencyDeclinationMethods.enUS(value, "Zloty", "Zlotys");
       },
       decimal: function (value: string) {
-        switch (value) {
-          case "1":
-            return "Grosz";
-          default:
-            return "Groszys";
-        }
+        return currencyDeclinationMethods.enUS(value, "Grosz", "Groszys");
       },
     },
     plPL: {
       whole: function (value: string): string {
-        const lastNumber = value.at(-1);
-        const preceedingNumber = value.at(-2);
-        switch (lastNumber) {
-          case "1":
-            return !!preceedingNumber ? "Złotych" : "Złoty";
-          case "2":
-          case "3":
-          case "4":
-            return (!!preceedingNumber && preceedingNumber !== "1") || value.length === 1 ? "Złote" : "Złotych";
-          default:
-            return "Złotych";
-        }
+        return currencyDeclinationMethods.plPL(value, "Złoty", "Złotych", "Złote");
       },
       decimal: function (value: string): string {
-        const lastNumber = value?.at(-1);
-        const preceedingNumber = value?.at(-2);
-        switch (lastNumber) {
-          case "1":
-            return !!preceedingNumber ? "Groszy" : "Grosz";
-          case "2":
-          case "3":
-          case "4":
-            return !!preceedingNumber && preceedingNumber !== "1" ? "Grosze" : "Groszy";
-          default:
-            return "Groszy";
-        }
+        return currencyDeclinationMethods.plPL(value, "Grosz", "Groszy", "Grosze");
       },
     },
   },

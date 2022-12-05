@@ -1,9 +1,20 @@
 import numeralsLocale from "./numeralsLocale";
 
-function parseAmountToWords(value = "0", parsingLocale = "enUS"): string {
-  if (value === "0" || value === "00") return numeralsLocale[parsingLocale as keyof typeof numeralsLocale].zero;
+function handleValueType(value: number | string, parsingLocale: string): string {
+  let valueStringified = typeof value === "string" ? value : value.toString();
+  if (numeralsLocale[parsingLocale as keyof typeof numeralsLocale].delimiter === ",") {
+    valueStringified = valueStringified.replace(".", ",");
+  }
 
-  const valueTriplets = ("0".repeat((2 * value.length) % 3) + value).match(/.{3}/g) ?? [];
+  return valueStringified;
+}
+
+function parseAmountToWords(value: number | string = "0", parsingLocale = "enUS"): string {
+  const valueStringified = handleValueType(value, parsingLocale);
+
+  if (valueStringified === "0" || valueStringified === "00") return numeralsLocale[parsingLocale as keyof typeof numeralsLocale].zero;
+
+  const valueTriplets = ("0".repeat((2 * valueStringified.length) % 3) + value).match(/.{3}/g) ?? [];
 
   if (valueTriplets.length > numeralsLocale[parsingLocale as keyof typeof numeralsLocale].largeNumbers().length) return "Parsing limits exceeded";
 
@@ -24,10 +35,7 @@ function parseAmountToWords(value = "0", parsingLocale = "enUS"): string {
 function concatParsedValues(amountToParse: number | string, currencySymbol: string, locale: string, toLowerCase = false): string {
   const matchingNumeralsLocale = Object.keys(numeralsLocale).find(k => k === locale) ?? "enUS";
 
-  let amountStringified = typeof amountToParse === "string" ? amountToParse : amountToParse.toString();
-  if (numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].delimiter === ",") {
-    amountStringified = amountStringified.replace(".", ",");
-  }
+  const amountStringified = handleValueType(amountToParse, matchingNumeralsLocale);
 
   const amountSplit = amountStringified.split(numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].delimiter);
   const wholePiece = amountSplit[0];
@@ -48,4 +56,7 @@ function concatParsedValues(amountToParse: number | string, currencySymbol: stri
   return toLowerCase ? concatenatedValues.toLowerCase() : concatenatedValues;
 }
 
-export default concatParsedValues;
+export default {
+  parseAmountToWords,
+  concatParsedValues,
+};
