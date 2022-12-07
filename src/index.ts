@@ -1,3 +1,4 @@
+import "core-js/actual/string/at";
 import numeralsLocale from "./locale/numeralsLocale";
 import errorMessages from "./errorMessages";
 
