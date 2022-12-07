@@ -1,22 +1,10 @@
 import numeralsLocale from "./locale/numeralsLocale";
 import errorMessages from "./errorMessages";
 
-function handleValueType(value: number | string, parsingLocale: string): string {
-  let valueStringified = typeof value === "string" ? value : value.toString();
+function parseAmountToWords(value: string = "0", parsingLocale = "enUS"): string {
+  if (value === "0" || value === "00") return numeralsLocale[parsingLocale as keyof typeof numeralsLocale].zero;
 
-  if (numeralsLocale[parsingLocale as keyof typeof numeralsLocale].delimiter === ",") {
-    valueStringified = valueStringified.replace(".", ",");
-  }
-
-  return valueStringified;
-}
-
-function parseAmountToWords(value: number | string = "0", parsingLocale = "enUS"): string {
-  const valueStringified = handleValueType(value, parsingLocale);
-
-  if (valueStringified === "0" || valueStringified === "00") return numeralsLocale[parsingLocale as keyof typeof numeralsLocale].zero;
-
-  const valueTriplets = ("0".repeat((2 * valueStringified.length) % 3) + value).match(/.{3}/g) ?? [];
+  const valueTriplets = ("0".repeat((2 * value.length) % 3) + value).match(/.{3}/g) ?? [];
 
   if (valueTriplets.length > numeralsLocale[parsingLocale as keyof typeof numeralsLocale].largeNumbers().length) {
     throw new Error(errorMessages.parsingLimits);
@@ -36,12 +24,10 @@ function parseAmountToWords(value: number | string = "0", parsingLocale = "enUS"
   );
 }
 
-function concatParsedValues(amountToParse: number | string, currencySymbol: string, locale: string, toLowerCase = false): string {
+function concatParsedValues(amountToParse: string, currencySymbol: string, locale: string, toLowerCase = false): string {
   const matchingNumeralsLocale = Object.keys(numeralsLocale).find(k => k === locale) ?? "enUS";
 
-  const amountStringified = handleValueType(amountToParse, matchingNumeralsLocale);
-
-  const amountSplit = amountStringified.split(numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].delimiter);
+  const amountSplit = amountToParse.split(numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].delimiter);
   const wholePiece = amountSplit[0];
   const decimalPiece = amountSplit[1];
 

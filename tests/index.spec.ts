@@ -40,24 +40,6 @@ describe("parseAmountToWords function", () => {
   const faultyParams = testParams.faulty.parseAmountToWords;
 
   describe("should return the expected number in words", () => {
-    describe("should return the expected number in words, given the value parameter is a floating point number", () => {
-      it("should return the expected number in words in American English", () => {
-        const params = testParams.correct.parseAmountToWords.enUS;
-        for (let entry of params.expectedData.entries()) {
-          const parsedValue = index.parseAmountToWords(entry[0], "enUS");
-          assert.equal(parsedValue, entry[1]);
-        }
-      });
-
-      it("should return the expected number in words in Polish", () => {
-        const params = testParams.correct.parseAmountToWords.plPL;
-        for (let entry of params.expectedData.entries()) {
-          const parsedValue = index.parseAmountToWords(entry[0], "plPL");
-          assert.equal(parsedValue, entry[1]);
-        }
-      });
-    });
-
     describe("should return the expected number in words, given the value parameter is a string", () => {
       it("should return the expected number in words in American English", () => {
         const params = testParams.correct.parseAmountToWords.enUS;
@@ -94,22 +76,6 @@ describe("concatParsedValues function", () => {
     } in words along with proper currency`, () => {
       const expected = correctParams[currencyKey as keyof typeof correctParams].expectedData;
       const currency = correctParams[currencyKey as keyof typeof correctParams].currency;
-
-      describe("should return the whole expected amount with proper currency, given the value parameter is a floating point number", () => {
-        it("should return the whole expected amount with proper currency in American English", () => {
-          for (let entry of expected.enUS.entries()) {
-            const parsedValue = index.concatParsedValues(entry[0], currency, "enUS", false);
-            assert.equal(parsedValue, entry[1]);
-          }
-        });
-
-        it("should return the whole expected amount with proper currency in Polish", () => {
-          for (let entry of expected.plPL.entries()) {
-            const parsedValue = index.concatParsedValues(entry[0], currency, "plPL", false);
-            assert.equal(parsedValue, entry[1]);
-          }
-        });
-      });
 
       describe("should return the expected amount with proper currency, given the value parameter is a string", () => {
         it("should return the expected amount with proper currency in American English", () => {
