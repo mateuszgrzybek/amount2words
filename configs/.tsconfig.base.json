@@ -9,8 +9,7 @@
     "declaration": true,
     "declarationMap": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "lib": ["ES2022", "DOM"]
+    "baseUrl": "."
   },
   "files": ["../src/index.ts"]
 }

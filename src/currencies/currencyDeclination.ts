@@ -1,3 +1,5 @@
+import "core-js/actual/string/at";
+
 const currencyDeclinationMethods = {
   // monetaryUnitSingular: Dollar
   enUS: function (value: string, monetaryUnitSingular: string, monetaryUnitPlural: string): string {
