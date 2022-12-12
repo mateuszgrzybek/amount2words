@@ -1,0 +1,31 @@
+name: Node.js Package
+
+on:
+  workflow_run:
+    workflows: ['Tests']
+    branches: [master]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout with checkout action
+        uses: actions/checkout@v3
+      - name: Setup Node.js with setup-node action
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          registry-url: https://registry.npmjs.org/
+      - name: Install package dependencies
+        run: npm ci
+        
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish Node.js package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.AMOUNT_2_WORDS_NPM}}
