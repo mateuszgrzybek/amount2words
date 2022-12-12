@@ -1,6 +1,7 @@
 # amount2words
 
-[![Tests](https://github.com/mateuszgrzybek/amount2words/actions/workflows/unit-tests.yml/badge.svg?branch=master)](https://github.com/mateuszgrzybek/amount2words/actions/workflows/unit-tests.yml) [![npm version](https://badge.fury.io/js/amount2words.svg)](https://badge.fury.io/js/amount2words)
+[![Tests](https://github.com/mateuszgrzybek/amount2words/actions/workflows/unit-tests.yml/badge.svg?branch=master)](https://github.com/mateuszgrzybek/amount2words/actions/workflows/unit-tests.yml) [![npm version](https://badge.fury.io/js/amount2words.svg)](https://badge.fury.io/js/amount2words)  
+
 A simple library for parsing numeric values into words, written in TypeScript.
 
 ## Description
