@@ -3,7 +3,7 @@ import numeralsLocale from "./locale/numeralsLocale";
 import errorMessages from "./errorMessages";
 
 function parseValueToWords(value: string = "0", parsingLocale = "enUS"): string {
-  if (value === "0" || value === "00") return numeralsLocale[parsingLocale as keyof typeof numeralsLocale].zero;
+  if (value === "0" || value === "00" || value.length === 0) return numeralsLocale[parsingLocale as keyof typeof numeralsLocale].zero;
 
   const valueTriplets = ("0".repeat((2 * value.length) % 3) + value).match(/.{3}/g) ?? [];
 

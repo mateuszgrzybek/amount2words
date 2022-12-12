@@ -1,5 +1,6 @@
 const enUS = {
   parseValueToWords: new Map<string, string>([
+    ["", "Zero"],
     ["0", "Zero"],
     ["1", "One"],
     ["2", "Two"],
@@ -24,6 +25,7 @@ const enUS = {
   ]),
   parseDecimalValueToWords: {
     USD: new Map<string, string>([
+      ["", "Zero Dollars and Zero Cents"],
       ["0", "Zero Dollars and Zero Cents"],
       ["0.0", "Zero Dollars and Zero Cents"],
       ["1", "One Dollar and Zero Cents"],
