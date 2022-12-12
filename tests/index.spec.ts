@@ -80,14 +80,14 @@ describe("concatParsedValues function", () => {
       describe("should return the expected amount with proper currency, given the value parameter is a string", () => {
         it("should return the expected amount with proper currency in American English", () => {
           for (let entry of expected.enUS.entries()) {
-            const parsedValue = index.concatParsedValues(entry[0].toString(), currency, "enUS", false);
+            const parsedValue = index.concatParsedValues(entry[0], currency, "enUS", false);
             assert.equal(parsedValue, entry[1]);
           }
         });
 
         it("should return the expected amount with proper currency in Polish", () => {
           for (let entry of expected.plPL.entries()) {
-            const parsedValue = index.concatParsedValues(entry[0].toString().replace(".", ","), currency, "plPL", false);
+            const parsedValue = index.concatParsedValues(entry[0], currency, "plPL", false);
             assert.equal(parsedValue, entry[1]);
           }
         });

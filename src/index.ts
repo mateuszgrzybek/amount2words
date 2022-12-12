@@ -28,7 +28,7 @@ function parseAmountToWords(value: string = "0", parsingLocale = "enUS"): string
 function concatParsedValues(amountToParse: string, currencySymbol: string, locale: string, toLowerCase = false): string {
   const matchingNumeralsLocale = Object.keys(numeralsLocale).find(k => k === locale) ?? "enUS";
 
-  const amountSplit = amountToParse.split(numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].delimiter);
+  const amountSplit = amountToParse.includes(".") ? amountToParse.split(".") : amountToParse.split(numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].delimiter);
   const wholePiece = amountSplit[0];
   const decimalPiece = amountSplit[1];
 
