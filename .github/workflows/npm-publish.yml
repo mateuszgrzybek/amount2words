@@ -20,11 +20,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install package dependencies
         run: npm ci
-        
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Publish Node.js package
         run: npm publish
         env:
