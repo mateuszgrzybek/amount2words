@@ -2,7 +2,7 @@ import "core-js/actual/string/at";
 import numeralsLocale from "./locale/numeralsLocale";
 import errorMessages from "./errorMessages";
 
-function parseAmountToWords(value: string = "0", parsingLocale = "enUS"): string {
+function parseValueToWords(value: string = "0", parsingLocale = "enUS"): string {
   if (value === "0" || value === "00") return numeralsLocale[parsingLocale as keyof typeof numeralsLocale].zero;
 
   const valueTriplets = ("0".repeat((2 * value.length) % 3) + value).match(/.{3}/g) ?? [];
@@ -25,7 +25,7 @@ function parseAmountToWords(value: string = "0", parsingLocale = "enUS"): string
   );
 }
 
-function concatParsedValues(amountToParse: string, currencySymbol: string, locale: string, toLowerCase = false): string {
+function parseDecimalValueToWords(amountToParse: string, currencySymbol: string, locale: string, toLowerCase = false): string {
   const matchingNumeralsLocale = Object.keys(numeralsLocale).find(k => k === locale) ?? "enUS";
 
   const amountSplit = amountToParse.includes(".") ? amountToParse.split(".") : amountToParse.split(numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].delimiter);
@@ -38,11 +38,11 @@ function concatParsedValues(amountToParse: string, currencySymbol: string, local
 
   const conjunctionWord = numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale].conjunctionWord;
 
-  const concatenatedValues = `${parseAmountToWords(wholePiece, locale)} ${numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale]?.wholeMonetaryUnit(
+  const concatenatedValues = `${parseValueToWords(wholePiece, locale)} ${numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale]?.wholeMonetaryUnit(
     wholePiece,
     currencySymbol,
     locale
-  )} ${conjunctionWord} ${parseAmountToWords(decimalPiece, locale)} ${numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale]?.decimalMonetaryUnit(
+  )} ${conjunctionWord} ${parseValueToWords(decimalPiece, locale)} ${numeralsLocale[matchingNumeralsLocale as keyof typeof numeralsLocale]?.decimalMonetaryUnit(
     decimalPiece,
     currencySymbol,
     locale
@@ -52,6 +52,6 @@ function concatParsedValues(amountToParse: string, currencySymbol: string, local
 }
 
 export default {
-  parseAmountToWords,
-  concatParsedValues,
+  parseValueToWords,
+  parseDecimalValueToWords,
 };

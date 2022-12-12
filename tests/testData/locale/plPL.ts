@@ -1,5 +1,5 @@
 const plPL = {
-  parseAmountToWords: new Map<string, string>([
+  parseValueToWords: new Map<string, string>([
     ["0", "Zero"],
     ["1", "Jeden"],
     ["2", "Dwa"],
@@ -22,7 +22,7 @@ const plPL = {
     ["44123001000", "Czterdzieści Cztery Miliardy Sto Dwadzieścia Trzy Miliony Jeden Tysiąc"],
     ["3677000000010", "Trzy Biliony Sześćset Siedemdziesiąt Siedem Miliardów Dziesięć"],
   ]),
-  concatParsedValues: {
+  parseDecimalValueToWords: {
     USD: new Map<string, string>([
       ["0", "Zero Dolarów i Zero Centów"],
       ["0.0", "Zero Dolarów i Zero Centów"],

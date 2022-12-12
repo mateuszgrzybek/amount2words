@@ -3,27 +3,27 @@ import { enUS, plPL } from "./locale/locales";
 
 const localeMaps = {
   correct: {
-    parseAmountToWords: {
-      enUS: enUS.parseAmountToWords,
-      plPL: plPL.parseAmountToWords,
+    parseValueToWords: {
+      enUS: enUS.parseValueToWords,
+      plPL: plPL.parseValueToWords,
     },
-    concatParsedValues: {
+    parseDecimalValueToWords: {
       USD: {
-        enUS: enUS.concatParsedValues.USD,
-        plPL: plPL.concatParsedValues.USD,
+        enUS: enUS.parseDecimalValueToWords.USD,
+        plPL: plPL.parseDecimalValueToWords.USD,
       },
       PLN: {
-        enUS: enUS.concatParsedValues.PLN,
-        plPL: plPL.concatParsedValues.PLN,
+        enUS: enUS.parseDecimalValueToWords.PLN,
+        plPL: plPL.parseDecimalValueToWords.PLN,
       },
     },
   },
   faulty: {
-    parseAmountToWords: {
+    parseValueToWords: {
       values: ["1000000000000000000000000000000000000", "2002350005550067890000000000000009999", "9999999999999999999999999999999999999999"],
       errorMessage: errorMessages.parsingLimits,
     },
-    concatParsedValues: {
+    parseDecimalValueToWords: {
       values: ["0.000", "0.001", "15.000957", "101.000009", "7891231.006787123", "3677000000010.123456789"],
       errorMessage: errorMessages.decimalPieceLength,
     },
