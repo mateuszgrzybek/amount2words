@@ -8,7 +8,7 @@ on:
       - completed
 
 jobs:
-  build:
+  build-and-publish-package:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout with checkout action
