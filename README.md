@@ -32,7 +32,7 @@ const parsedValue = a2w.parseValueToWords("6794", "enUS");
 // returns Six Thousand Seven Hundred Ninety-Four
 
 // parsing decimal amount, with currency, for given locale
-const parsedDecimalValue = const parsedValue = a2w.parseDecimalValueToWords(inputValue, "USD", "enUS");
+const parsedDecimalValue = const parsedValue = a2w.parseDecimalValueToWords("334877.99", "USD", "enUS");
 // returns Three Hundred Thirty-Four Thousand Eight Hundred Seventy-Seven Dollars and Ninety-Nine Cents
 ```
 
