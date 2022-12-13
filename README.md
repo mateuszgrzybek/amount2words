@@ -2,7 +2,10 @@
 
 [![Tests](https://github.com/mateuszgrzybek/amount2words/actions/workflows/unit-tests.yml/badge.svg?branch=master)](https://github.com/mateuszgrzybek/amount2words/actions/workflows/unit-tests.yml) ![npm](https://img.shields.io/npm/v/amount2words) ![npm bundle size](https://img.shields.io/bundlephobia/min/amount2words)\
 \
-A simple library for parsing numeric values into words, written in TypeScript.
+A simple library for parsing numeric values into words, written in TypeScript.\
+\
+[Use case demo](https://codepen.io/mateuszgrzybek/details/VwdOzqo)
+
 
 ## Description
 
